@@ -1,38 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade Aliança</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comunidade de ofertas</title>
 </head>
+<body style="background-color: black; padding: 0; margin: 0; box-sizing: border-box;">
+  <main style="display: flex; align-items: center; flex-direction: column; padding-top: 50px; color: white; font-family: arial;">
+    <img src="https://ugc.production.linktr.ee/204a4578-6f35-41b8-850b-e1647864e193_AppAlianaIcon.png?io=true&size=avatar-v3_0"
+         style="width: 100px; border-radius: 50%;">
+    <div>
+      <h3 style="text-align:center;">Olá! Vim pelo operador <span id="vendedor"></span>!</h3>
+      <div style="font-family:sans-serif; text-align:center; margin-top:40px; display:flex; justify-content:center;">
+        <a href="https://chat.whatsapp.com/SEU_CODIGO_AQUI" style="text-decoration: none;">
+          <button style="display:flex; align-items:center; background-color:#222222; outline:none; border:none; padding:10px; color:white; text-transform:uppercase; gap:10px; border-radius:10px;">
+            <span>
+              <img src="https://ugc.production.linktr.ee/261685ae-810e-4779-805e-f476ca31590b_05.png?io=true&size=thumbnail-stack_v1_0"
+                   style="width:40px;">
+            </span>
+            <span>Comunidade de ofertas</span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </main>
 
-<body style="background-color: black; padding: 0%; margin: 0%; box-sizing: border-box;">
-    <main
-        style="display: flex; align-items: center; flex-direction: column; padding-top: 50px; color: white; font-family: arial;">
-        <img src="https://ugc.production.linktr.ee/204a4578-6f35-41b8-850b-e1647864e193_AppAlianaIcon.png?io=true&size=avatar-v3_0"
-            style="width: 100px; border-radius: 50%;">
-        <div>
-            <h3>Olá! Vim pelo operador {vendedor}!</h1>
-            <script>window.top.location.href</script>
-            <div style="font-family:sans-serif;text-align:center;margin-top:40px;display: flex;justify-content: center;">
-                <!-- <p>Abrindo a comunidade...</p>
-                <p><a href=${url} target="_top" style="font-size:20px">Toque aqui se não abrir sozinho</a></p> -->
-                <a href="${url}" target="_top" style="text-decoration: none;">
-                    <button style="display: flex; align-items: center; background-color: #222222; outline: none; border: none; padding: 10px; color: white; text-transform: uppercase; gap: 10px; border-radius: 10px;">
-                        <span>
-                            <img 
-                                src="https://ugc.production.linktr.ee/261685ae-810e-4779-805e-f476ca31590b_05.png?io=true&size=thumbnail-stack_v1_0"
-                                style="width: 40px;"
-                            >
-                        </span>
-                        <span>Comunidade de ofertas</span>
-                    </button>
-                </a>
-            </div>
+  <script>
+    const SCRIPT_URL = 'COLE_AQUI_A_URL_EXEC_DO_APPS_SCRIPT';
 
-        </div>
-    </main>
+    const params = new URLSearchParams(location.search);
+    const vendedor = (params.get('v') || 'sem_vendedor').trim().toLowerCase().slice(0, 40) || 'sem_vendedor';
+    document.getElementById('vendedor').textContent = vendedor;
+
+    function gerarId() {
+      return 'd' + Date.now().toString(36) +
+             Math.random().toString(36).slice(2, 12) +
+             Math.random().toString(36).slice(2, 8);
+    }
+
+    let id;
+    try {
+      id = localStorage.getItem('aliana_dispositivo');
+      if (!id) {
+        id = gerarId();
+        localStorage.setItem('aliana_dispositivo', id);
+      }
+    } catch (e) {
+      id = gerarId();
+    }
+
+    const q = new URLSearchParams({ acao: 'registrar', v: vendedor, id: id });
+    fetch(SCRIPT_URL + '?' + q.toString(), { mode: 'no-cors', keepalive: true }).catch(function () {});
+  </script>
 </body>
-
 </html>
