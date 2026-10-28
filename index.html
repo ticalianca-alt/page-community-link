@@ -40,10 +40,10 @@
 
     let id;
     try {
-      id = localStorage.getItem('aliana_dispositivo');
+      id = localStorage.getItem('alianca_dispositivo');
       if (!id) {
         id = gerarId();
-        localStorage.setItem('aliana_dispositivo', id);
+        localStorage.setItem('alianca_dispositivo', id);
       }
     } catch (e) {
       id = gerarId();
