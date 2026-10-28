@@ -32,6 +32,10 @@
     const vendedor = (params.get('v') || 'sem_vendedor').trim().toLowerCase().slice(0, 40) || 'sem_vendedor';
     document.getElementById('vendedor').textContent = vendedor;
 
+    if (vedendor == 'fiscais') {
+      document.getElementById('vendedor').textContent = 'Vim pelos fiscais!';
+    }
+
     function gerarId() {
       return 'd' + Date.now().toString(36) +
              Math.random().toString(36).slice(2, 12) +
